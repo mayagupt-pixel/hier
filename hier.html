@@ -1,0 +1,158 @@
+
+      <!DOCTYPE html>
+<html>
+  <head>
+    <title>Hier Design Testcase</title>
+    <link rel="stylesheet" href="css/drv_recomm.css">
+    <style>
+      table,
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+    </style>
+
+  </head>
+
+  <body>
+<div class="a"><b>Design</b></div>
+<img src="verilog.PNG" alt="writeup">
+</br>
+  </br>
+</br>
+    <table>
+      <tr>
+        <th>Content</th>
+        <th>Method 1</th>
+        <th>Method 2</th>
+</tr>
+
+
+
+      <!--Basic code-->
+
+
+<tr>
+  <td>Verilog</td>
+  <td></td>
+<td>-  </td>
+</tr>
+
+<tr>
+  <td>read_sdc</td>
+  <td>
+
+
+                           </td>
+<td> Use 'report_clocks' to get all clocks in design</td>
+</tr>
+
+<tr>
+  <td>ViewDefinition/MMMC</td>
+  <td><a href = "https://mayagupt-pixel.github.io/mmmc/">Sample File</a></td>
+<td>> report_analysis_views -type active/leakage/dynamic</br>
+> all_analysis_view -type active/leakage </td>
+</tr>
+<tr>
+  <td>SPEF/DEF</td>
+  <td><a href = "https://mayagupt-pixel.github.io/innovus/">Sample Script</a></td>
+<td> IN Spef:
+Check D_NET section. In this line you will have total cap of that net. </td>
+</tr>
+<tr>
+  <td></td>
+  <td></td>
+<td>-  </td>
+</tr>
+<tr>
+  <td>VCD</td>
+  <td> <a href = "https://mayagupt-pixel.github.io/gate_vcd/">1) Gate level VCD </a></br>
+
+<a href = "https://mayagupt-pixel.github.io/RTL_VCD/">1) RTL level VCD </a></br>
+
+
+</td>
+<td></br>
+ </td>
+</tr>
+<tr>
+  <td>Power Analysis flow</td>
+  <td>
+    read_lib -lef <> </br>
+    read_verilog <></br>
+    #read_lib <></br>
+    read_view_definition <></br>
+    set_top_module <> -ignore_undefined_cell </br>
+    #read_sdc <></br>
+    read_spef -rc_corner <> </br>
+    report_power
+        </td>
+<td>-  </td>
+</tr>
+<!--Nav Code-->
+      <tr>
+        <td>Rail Analysis Flow</td>
+        <td>    read_lib -lef <> </br>
+            read_verilog <></br>
+            #read_lib <></br>
+            read_view_definition <></br>
+            set_top_module <> -ignore_undefined_cell </br>
+            #read_sdc <></br>
+            read_spef -rc_corner <> </br></br>
+            set_rail_analysis_mode -method   static -accuracy  xd -analysis_view   AV_wc_on \</br>
+            -power_grid_library         {  ./techonly.cl   ./stdcells.cl \  }</br></br>
+
+
+
+            set_pg_nets -net VDD    -voltage 0.9 -threshold 0.85 -force</br>
+            set_pg_nets -net VSS        -voltage 0.0 -threshold 0.05 -force</br></br>
+
+
+
+            set_power_pads \</br>
+                -net                        VDD \</br>
+                -format                     xy \</br>
+                -file                       ./vdd.pp</br></br>
+
+
+
+
+            set_power_pads \</br>
+                -net                        VSS \</br>
+                -format                     xy \</br>
+                -file                       ./vss.pp</br></br>
+
+
+
+            set_power_data -reset</br>
+            set_power_data \</br>
+                -format                     current \</br>
+                { \</br>
+                    ./static_VDD.ptiavg \</br>
+                    ./static_VSS.ptiavg \</br>
+                }</br></br>
+
+
+
+            analyze_rail \</br>
+                -output           ./staticRailResults \</br>
+                -type                     net VDD
+
+
+
+        </td>
+        <td>
+<u>VDD.pp</br> </u>
+          *vsrc_name   x   y   layer_name</br>
+vsrc3 4.74 21.36 Metal3</br></br>
+<u>VSS.pp</u></br>
+*vsrc_name   x   y   layer_name</br>
+VSSvsrc1 1.85 27.44 Metal3
+
+</td>
+      </tr>
+    </table>
+  </body>
+</html>
