@@ -37,7 +37,33 @@
 <tr>
   <td>Verilog</td>
   <td></td>
-<td>-  </td>
+<td> <i><u>top.v</i></u> </br>
+  module top (a, b, c, d, x, y, z, z1);</br>
+  input a, b, c, d;</br>
+  output x, y, z, z1;</br>
+  BUFX2 u0(.A(a), .Y(x));</br>
+  B1 b1(.l(b), .m(y));</br>
+  B2 b2(.n(c), .p(d), .o(z), .q(z1));</br>
+  endmodule</br></br>
+
+ <i><u>B1.v</i></u> </br>
+ module B1(l, m);</br>
+ input l;</br>
+ output m;</br>
+ BUFX2 u11 (.A(l), .Y(m));</br>
+ endmodule </br></br>
+
+
+  <i><u>B2.v</i></u> </br>
+
+  module B2(n, p, o, q);</br>
+  input n, p;</br>
+  output o, q;</br>
+  BUFX2 u21(.A(n), .Y(o));</br>
+  BUFX2 u22(.A(p), .Y(q));</br>
+  endmodule</br></br>
+
+ </td>
 </tr>
 
 <tr>
