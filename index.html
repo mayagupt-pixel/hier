@@ -107,9 +107,10 @@ endmodule </br>
   <td>SPEF/DEF</td>
   <td><a href = "https://mayagupt-pixel.github.io/innovus/">Sample Script</a></td>
 <td> 3 different SPEF and 3 different DEF correspoiding to top, B1 & B2. </br>
-<b>-top.spef </b>(In innovus read top verilog only and made changes in SDC then write out top.def & top.spef (there will warning that B1, B2 doesnt have LEF n Liberty))</br>
-<b>-b1.spef </b>( In Innovus read B1 verilog then write out B1.def and B1.spef)</br>
-<b>-b2.spef</b>( In Innovus read B2 verilog then write out B2.def and B2.spef)</br></br>
+<b>-b1.spef </b>( In Innovus read B1 verilog then write out B1.def, B1.spef, b1.lef using write_lef_abstract;;;; then use tempus and use do_extract_model to write out b1.lib)</br>
+<b>-b2.spef</b>( In Innovus read B2 verilog then write out B2.def, B2.spef, b2.lef using write_lef_abstract;;;; then use tempus and use do_extract_model to write out b2.lib)</br>
+<b>-top.spef </b>(In innovus read top, b1, b2 verilog only and made changes in SDC amd add b1.lef, b2.lef and b1.lib and b2.lib then write out top.def & top.spef (there will warning that B1, B2 doesnt have LEF n Liberty))</br></br>
+
 <b>-top.def </b>(flow same as top.spef)</br>
 <b>-b1.def</b> (flow same as b1.spef)</br>
 <b>-b2.def</b> (flow same as b2.spef)</br></td>
@@ -133,10 +134,10 @@ endmodule </br>
 <tr>
   <td>Power Analysis flow</td>
   <td>
-    read_lib -lef <> </br>
-    read_verilog <></br>
+    read_lib -lef <read all tech, stdcell lef and add b1.lef and b2.lef> </br>
+    read_verilog <read all verilog top.v, b1.v b2.v></br>
     #read_lib <></br>
-    read_view_definition <></br>
+    read_view_definition <add b1.lib, b2.lib></br>
     set_top_module <> -ignore_undefined_cell </br>
     #read_sdc <></br>
     read_spef -rc_corner <> </br>
