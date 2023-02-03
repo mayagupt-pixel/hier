@@ -91,6 +91,11 @@ endmodule </br>
 <tr>
   <td>read_sdc</td>
   <td>
+    create_clock [get_ports {a}] -name a  -period 16 -waveform {0 8}</br>
+
+    create_clock [get_ports {b}] -name b  -period 16 -waveform {0 8}</br>
+    create_clock [get_ports {c}] -name c  -period 16 -waveform {0 8}</br>
+    set_propagated_clock [all_clocks]  #set_ideal_network -no_propagate [get_net se]
 
 
                            </td>
@@ -122,9 +127,9 @@ endmodule </br>
 </tr>
 <tr>
   <td>VCD</td>
-  <td> <a href = "https://mayagupt-pixel.github.io/gate_vcd/">1) Gate level VCD </a></br>
+  <td> <a href = "https://mayagupt-pixel.github.io/gate_vcd/">1) Gate level VCD (as of now this is not hier) </a></br>
 
-<a href = "https://mayagupt-pixel.github.io/RTL_VCD/">1) RTL level VCD </a></br>
+<a href = "https://mayagupt-pixel.github.io/RTL_VCD/">1) RTL level VCD(as of now this is not hier) </a></br>
 
 
 </td>
@@ -133,7 +138,15 @@ endmodule </br>
 </tr>
 <tr>
   <td>Power Analysis flow</td>
-  <td>
+  <td>read_lib -lef {gsclib090_tech.lef gsclib090_macro.lef}</br>
+read_verilog {top.v}</br>
+#read_lib slow.lib</br>
+read_view_definition mmmc_top.view</br>
+set_top_module top -ignore_undefined_cell</br>
+read_def {top_wo_block.def}</br>
+read_spef -rc_corner  RC_wc_125  -decoupled {top_wo_block.spef}</br>
+ set_power_analysis_mode -analysis_view AV_wc_on  -method static  -write_static_currents true -create_binary_db true </br>
+report_power
 
         </td>
 <td>read_lib -lef {read all tech, stdcell lef and add b1.lef and b2.lef} </br>
