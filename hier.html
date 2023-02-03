@@ -134,16 +134,16 @@ endmodule </br>
 <tr>
   <td>Power Analysis flow</td>
   <td>
-    read_lib -lef {read all tech, stdcell lef and add b1.lef and b2.lef} </br>
-    read_verilog {read all verilog top.v, b1.v b2.v}</br>
-    #read_lib <></br>
-    read_view_definition {add b1.lib, b2.lib}</br>
-    set_top_module <> -ignore_undefined_cell </br>
-    #read_sdc <></br>
-    read_spef -rc_corner <> </br>
-    report_power
+
         </td>
-<td>-  </td>
+<td>read_lib -lef {read all tech, stdcell lef and add b1.lef and b2.lef} </br>
+read_verilog {read all verilog top.v, b1.v b2.v}</br>
+#read_lib <></br>
+read_view_definition {add b1.lib, b2.lib}</br>
+set_top_module <> -ignore_undefined_cell </br>
+#read_sdc <></br>
+read_spef -rc_corner <> </br>
+report_power</td>
 </tr>
 <!--Nav Code-->
       <tr>
